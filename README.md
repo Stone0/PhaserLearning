@@ -1,2 +1,3 @@
 # PhaserLearning
-some phaser game demo.
+
+## phaser2.6.2 games demo.
