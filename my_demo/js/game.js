@@ -9,6 +9,7 @@ var player;
 var player_life = 5;
 var baddies;
 var baddies_life = 2;
+var test_num = 0;
 var cursors;
 var stars;
 var score = 0;
@@ -27,9 +28,6 @@ function preload() {
     game.load.spritesheet('dude', 'img/dude.png', 32, 48);
     // 加载兔子
     game.load.spritesheet('baddie', 'img/baddie.png', 32, 32);
-    game.load.onFileComplete.add(function(){
-        
-    });
 }
 
 // 游戏场景创建
@@ -76,7 +74,8 @@ function create() {
     player.animations.add('right', [5, 6, 7, 8], 12, true);
     
     // 创建兔子精灵
-    baddies = game.add.sprite(80, 405, 'baddie');
+    // baddies = game.add.sprite(80, 505, 'baddie');
+    baddies = game.add.sprite(80, 500, 'baddie');
     // 设置精灵动画的初始帧
     baddies.frame = 2;
     game.physics.arcade.enable(baddies);
@@ -149,9 +148,20 @@ function update() {
         //         baddies.frame = 2;
         //     }
         // }
+        if (jump == 2)
+        {
+            console.log(baddies.frame);
+            if (baddies.frame == 2)
+            {
+                baddies.frame = 1;
+                jump = 0;
+            }
+        }
+        // console.log(jump);
         
         if (baddies.frame == 2 && baddies.body.velocity.y == 0)
         {
+            console.log('right');
             baddies.body.velocity.y = -40;
             baddies.body.velocity.x = 50;
             baddies.animations.play('right');
@@ -159,9 +169,10 @@ function update() {
         }
         else if (baddies.frame == 1 && baddies.body.velocity.y == 0)
         {
-            // baddies.body.velocity.y = -50;
-            // baddies.body.velocity.x = -50;
-            // baddies.animations.play('left');
+            console.log('left');
+            baddies.body.velocity.y = -40;
+            baddies.body.velocity.x = -50;
+            baddies.animations.play('left');
             jump++;
         }
     }
